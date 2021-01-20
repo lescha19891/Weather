@@ -20,11 +20,35 @@
 	add_action('ls_wp_update_weather', 'ls_wp_loading_weather');
 
 	function ls_wp_loading_weather(){
+		$DAYS = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
 		$url = 'https://api.darksky.net/forecast/81b61e0936068afa7f3b5d5443c9f690/55.773202,27.072710?lang=ru&exclude=minutely,hourly,flags,alerts&units=auto';
 		$response = wp_remote_get($url);
 		$responseBody = wp_remote_retrieve_body($response);
 		$weather = json_decode($responseBody, true);
-		update_option('ls_wp_weather_data', $weather);
+		$result  = [];
+        if (!empty($weather) and isset($weather["daily"]) and isset($weather["daily"]["data"])) {
+
+            $days   = $weather["daily"]["data"];
+            $result = [
+                'day'         => $DAYS[date('w', $days[1]["time"])],
+                'temperature' => round($days[1]["temperatureMax"]),
+                'icon'        => "https://darksky.net/images/weather-icons/" . $days[1]["icon"] . ".png",
+                'description' => $days[1]["summary"],
+                'firstDay'    => [
+                    'day'  => $DAYS[date('w', $days[2]["time"])],
+                    'icon' => "https://darksky.net/images/weather-icons/" . $days[2]["icon"] . ".png"
+                ],
+                'secondDay'   => [
+                    'day'  => $DAYS[date('w', $days[3]["time"])],
+                    'icon' => "https://darksky.net/images/weather-icons/" . $days[3]["icon"] . ".png"
+                ],
+                'thirdDay'    => [
+                    'day'  => $DAYS[date('w', $days[4]["time"])],
+                    'icon' => "https://darksky.net/images/weather-icons/" . $days[4]["icon"] . ".png"
+                ]
+            ];
+        }
+		update_option('ls_wp_weather_data', $result);
 	}
 	
 	add_action( 'admin_menu', function(){
@@ -37,5 +61,6 @@
             plugins_url( 'image/menu-icon.svg', __FILE__ ),
             84
 		);
+
 	});
 ?>
