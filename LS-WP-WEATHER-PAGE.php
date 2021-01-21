@@ -1,28 +1,28 @@
-<?php $result = get_option('ls_wp_weather_data');?>
+<?php $result = get_weather();?>
 
 <header>
     <h1>Прогноз погоды</h1>
 </header>
 <body>
     <ul style=" font-size: 2em">
-        <li> Сегодня:<?=$result['day']?></li>
-        <li> Температура:<?=$result['temperature']?> <sup>0</sup> C </li>
+        <li> Сегодня: <?=$result['day']?></li>
+        <li> Температура: <?=$result['temperature']?> <sup>0</sup>C </li>
         <li> <img src="<?=$result['icon']?>", alt="<?=$result['icon']?>"> </li>
         <li> <?=$result['description']?></li>
     </ul>
- <table style=" font-size: 2em">
-    <th>Другие дни</th>
+ <table border="1", cellpadding="7" style=" font-size: 2em " >
+    <th colspan="2">Другие дни</th>
  <tr>
-    <td><?=$result['firstDay']['day']?></td>
-    <td><img src="<?=$result['firstDay']['icon']?>", alt="<?=$result['icon']?>"></td>
+    <td align="center"><?=$result['firstDay']['day']?></td>
+    <td align="center"><img src="<?=$result['firstDay']['icon']?>", alt="<?=$result['icon']?>" height=25></td>
  </tr>
  <tr>
-    <td><?=$result['secondDay']['day']?></td>
-    <td><img src="<?=$result['secondDay']['icon']?>", alt="<?=$result['icon']?>"></td>
+    <td align="center"><?=$result['secondDay']['day']?></td>
+    <td align="center"><img src="<?=$result['secondDay']['icon']?>", alt="<?=$result['icon']?>" height=25></td>
  </tr>
  <tr>
-    <td><?=$result['thirdDay']['day']?></td>
-    <td><img src="<?=$result['thirdDay']['icon']?>", alt="<?=$result['icon']?>"></td>
+    <td align="center"><?=$result['thirdDay']['day']?></td>
+    <td align="center"><img src="<?=$result['thirdDay']['icon']?>", alt="<?=$result['icon'] ?>" height=25></td>
  </tr>
 
     </table>

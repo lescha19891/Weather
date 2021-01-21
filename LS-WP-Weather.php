@@ -50,11 +50,14 @@
         }
 		update_option('ls_wp_weather_data', $result);
 	}
-	
+	function get_weather(){
+		return get_option('ls_wp_weather_data');
+
+	}
 	add_action( 'admin_menu', function(){
 	        add_menu_page(
-            'LS WP weather',
-            'LS WP weather',
+            'LS WP Weather',
+            'LS WP Weather',
             'manage_options',
 			LS_WP_WEATHER_PAGE . '/LS-WP-WEATHER-PAGE.php',
             '',
