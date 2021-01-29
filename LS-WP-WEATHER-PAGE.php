@@ -1,4 +1,4 @@
-<?php $result = get_weather();?>
+<?php $result = ls_get_weather();?>
 
 <header>
     <h1>Прогноз погоды</h1>

@@ -50,7 +50,7 @@
         }
 		update_option('ls_wp_weather_data', $result);
 	}
-	function get_weather(){
+	function ls_get_weather(){
 		return get_option('ls_wp_weather_data');
 
 	}
