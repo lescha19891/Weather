@@ -47,12 +47,17 @@
                     'icon' => "https://darksky.net/images/weather-icons/" . $days[4]["icon"] . ".png"
                 ]
             ];
-        }
+		}
 		update_option('ls_wp_weather_data', $result);
 	}
 	function ls_get_weather(){
 		return get_option('ls_wp_weather_data');
+	}
 
+	function ls_get_weatherObj(){
+		$array=get_option('ls_wp_weather_data');
+		$result=json_decode(json_encode($array));
+		return $result;
 	}
 	add_action( 'admin_menu', function(){
 	        add_menu_page(
